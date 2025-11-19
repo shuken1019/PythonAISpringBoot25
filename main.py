@@ -9,6 +9,15 @@ from starlette.middleware.base import BaseHTTPMiddleware
 #미들 웨어는 모든 요청에 대해 실행되며, 요청을 처리하기 전에 응답을 반환하기 전에 특정 작업을 수행할 수 있음
 #예를 들어 로깅, 인증, cors처리, 압축등
 import logging #로깅 처리용 메서드
+
+app = FastAPI(#앱의 시그니처와 환경설정을 담당) #java -> new FASTAPI();객체만듬
+    title="MBC Ai study",
+    description="MBC Ai study",
+    version="0.0.1",
+    docs_url = None,#http://localhost:8001/docs #보안상 None처리로
+    redoc_url= None #http://localhost:8001/redoc #보안상 None처리로
+)
+
 class LoggingMiddleware(BaseHTTPMiddleware): #로그인 콘솔에 출력하는 용도 1개의 사용위치
     logging.basicConfig(level=logging.INFO) #로그 출력 추가
     async def dispatch(self, request, call_next) :
@@ -17,18 +26,12 @@ class LoggingMiddleware(BaseHTTPMiddleware): #로그인 콘솔에 출력하는 �
         logging.info(f"Status Code : {response.status_code}")
         return response
 
-    app.add_middleware(LoggingMiddleware) #모든 요청에 대해 로그를 남기는 미들웨어 클래스를 사용함
+app.add_middleware(LoggingMiddleware) #모든 요청에 대해 로그를 남기는 미들웨어 클래스를 사용함
 
-    class Item(BaseModel): #아이템 객체생성(BaseModel:객체 연결->상속)1개의 사용 위치
-        name : str         #상품명: 문자열
-        description : str = None #상품설명: 문자열(null)
-app = FastAPI(#앱의 시그니처와 환경설정을 담당) #java -> new FASTAPI();객체만듬
-    title="MBC Ai study",
-    description="MBC Ai study",
-    version="0.0.1",
-    docs_url = None,#http://localhost:8001/docs #보안상 None처리로
-    redoc_url= None #http://localhost:8001/redoc #보안상 None처리로
-)
+class Item(BaseModel): #아이템 객체생성(BaseModel:객체 연결->상속)1개의 사용 위치
+    name : str         #상품명: 문자열
+    description : str = None #상품설명: 문자열(null)
+
 class Item(BaseModel):
     name:str
     description:str=None
