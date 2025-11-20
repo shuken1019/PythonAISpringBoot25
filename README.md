@@ -26,5 +26,5 @@ main.py 실행 Terminal에서 D:\phthonWorkSpace> uvicorn main:app --reload --po
 
 
 
-<img width="1241" height="757" alt="image" src="https://github.com/user-attachments/assets/4674b169-767b-4f0b-8018-dc9188243abb" />
+<img width="1241" height="757" alt="image" src="https://github.com/user-attachments/assets/82766da6-fbed-4c48-9d59-b686b9aa3712" />
 
